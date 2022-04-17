@@ -15,4 +15,5 @@ RUN mv /var/www/html/wordpress/wp-config-sample.php  /var/www/html/wordpress/wp-
 COPY ./tools/wp-config.php  /var/www/html/wordpress/wp-config.php
 
 
-CMD ["/usr/bin/supervisord", "-n"]
+EXPOSE 9000
+CMD ["/bin/bash"]

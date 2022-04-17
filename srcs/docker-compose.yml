@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mariadb: 
+    build: ./requirements/mariadb/
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=ybolles
+      - MYSQL_DATABASE=ybolles
+      - MYSQL_USER=ybolles
+      - MYSQL_PASSWORD=ybolles
