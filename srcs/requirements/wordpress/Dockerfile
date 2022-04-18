@@ -3,14 +3,16 @@ FROM debian:buster
 RUN apt-get update && \
 	apt-get install wget -y && \
 	apt-get install unzip -y && \
-	apt-get install php-fpm php-mysql -y
+	apt-get install php-fpm php-mysql -y && \
+	apt-get upgrade -y
 # Download the latest WordPress version available at https://wordpress.org/download/ and extract it in a directory on your server:
 RUN cd /tmp && wget https://wordpress.org/latest.zip 
 RUN mkdir -p /var/www/html && unzip -d /var/www/html/ /tmp/latest.zip 
 RUN chown www-data:www-data -R /var/www/html/wordpress/
 RUN mv /var/www/html/wordpress/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
 COPY ./tools/wp-config.php  /var/www/html/wordpress/wp-config.php
-
+RUN service php7.3-fpm start
+# RUN service php7.3-fpm stop
 
 EXPOSE 9000
-ENTRYPOINT exec php-fpm7.3 --nodaemonize
+CMD [ "php-fpm7.3", "--nodaemonize" ]
