@@ -5,7 +5,7 @@ services:
     build: ./requirements/mariadb/
     restart: always
     ports:
-      - "3306:3306"
+      - 3306:3306
     # volumes:
     #   - inception_vol2:/var/lib/mysql
   wordpress:
@@ -15,7 +15,7 @@ services:
     ports:
       - 9000:9000
     volumes:
-      - inception_vol:/var/www/html
+      - Wordpress:/var/www/html
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
@@ -23,14 +23,14 @@ services:
     ports:
       - 443:443
     volumes:
-      - inception_vol:/var/www/html
+      - Wordpress:/var/www/html
 
 volumes:
-  inception_vol:
+  Wordpress:
     driver_opts:
-        type: none
-        device: "/Users/ybolles/Desktop/zreg/wrp"
-        o: bind
+        type: 'none'
+        device: '/Users/ybolles/Desktop/incep/wordpress'
+        o: 'bind'
   # inception_vol2:
   #   driver_opts:
   #     o: bind
