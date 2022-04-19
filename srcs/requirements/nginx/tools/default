@@ -20,14 +20,12 @@ server {
         try_files $uri $uri/ /index.php?$args;
         }
 
-     location ~ .php$ {
-        try_files $uri =404;
-        include /etc/nginx/fastcgi_params;
-        fastcgi_read_timeout 3600s;
-        fastcgi_buffer_size 128k;
-        fastcgi_buffers 4 128k;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+     location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass wordpress:9000;
         fastcgi_index index.php;
-            }
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_NAME $fastcgi_script_name;
         }
+    }
