@@ -6,14 +6,8 @@ services:
     restart: always
     ports:
       - 3306:3306
-    # volumes:
-    #   - mydb:/var/lib/mysql
-  adminer:
-    build: ./requirements/bonus/adminer/
-    depends_on:
-      - mariadb
-    ports:
-      - 8080:8080
+    volumes:
+      - mydb:/var/lib/mysql
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
@@ -35,19 +29,25 @@ services:
       - 443:443
     volumes:
       - Wordpress:/var/www/html
+  adminer:
+    build: ./requirements/bonus/adminer/
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:8080
 volumes:
-  Wordpress: {}
-  # mydb:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: /Users/ybolles/Desktop/incep/db
-  #     o: bind
-  # Wordpress:
-  #   driver_opts:
-  #     type: none
-  #     device: /Users/ybolles/Desktop/incep/wordpress
-  #     o: bind
+  # Wordpress: {}
+  mydb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/ysrbolles/Desktop/incep/db
+      o: bind
+  Wordpress:
+    driver_opts:
+      type: none
+      device: /Users/ysrbolles/Desktop/incep/wordpress
+      o: bind
 
 # networks:
 # networks:
