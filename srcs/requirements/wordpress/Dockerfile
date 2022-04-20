@@ -11,6 +11,7 @@ RUN mkdir -p /var/www/html && unzip -d /var/www/html/ /tmp/latest.zip
 RUN mv /var/www/html/wordpress/wp-config-sample.php  /var/www/html/wordpress/wp-config.php
 COPY ./tools/wp-config.php  /var/www/html/wordpress/wp-config.php
 RUN sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/g' /etc/php/7.3/fpm/pool.d/www.conf
+RUN sed -i 's/;clear_env = no/clear_env = no/g' /etc/php/7.3/fpm/pool.d/www.conf
 RUN service php7.3-fpm start
 RUN chown www-data:www-data -R /var/www/html/wordpress/
 # RUN sed/run/php/php7.3-fpm.sock

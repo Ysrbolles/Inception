@@ -1,4 +1,4 @@
-version: '3.6'
+version: '3'
 services:
   mariadb:
     container_name: mariadb
@@ -7,11 +7,20 @@ services:
     ports:
       - 3306:3306
     # volumes:
-    #   - inception_vol2:/var/lib/mysql
+    #   - mydb:/var/lib/mysql
+  adminer:
+    image: adminer
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:8080
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
     restart: always
+    env_file: .env
+    depends_on:
+      - mariadb
     ports:
       - 9000:9000
     volumes:
@@ -20,23 +29,27 @@ services:
     container_name: nginx
     build: ./requirements/nginx/
     restart: always
+    depends_on:
+      - wordpress
     ports:
       - 443:443
     volumes:
       - Wordpress:/var/www/html
-
 volumes:
-  Wordpress:
-    driver_opts:
-        type: 'none'
-        device: '/Users/ybolles/Desktop/incep/wordpress'
-        o: 'bind'
-  # inception_vol2:
+  Wordpress: {}
+  # mydb:
+  #   driver: local
   #   driver_opts:
+  #     type: none
+  #     device: /Users/ybolles/Desktop/incep/db
   #     o: bind
-  #     type: 'none'
-  #     device: Users/ybolles/Desktop/zreg/mydb
+  # Wordpress:
+  #   driver_opts:
+  #     type: none
+  #     device: /Users/ybolles/Desktop/incep/wordpress
+  #     o: bind
 
+# networks:
 # networks:
 #   default:
 #     external:
