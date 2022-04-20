@@ -36,5 +36,16 @@ services:
     ports:
       - 8080:8080
 volumes:
-  mydb: {}
-  Wordpress: {}
+  mydb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/ysrbolles/Desktop/incep/db
+      o: bind
+  Wordpress:
+    driver_opts:
+      type: none
+      device: /Users/ysrbolles/Desktop/incep/wordpress
+      o: bind
+
+# networks:
