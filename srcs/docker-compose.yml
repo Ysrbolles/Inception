@@ -1,5 +1,6 @@
 version: '3'
 services:
+  ###################### Database container #####################
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/
@@ -8,6 +9,9 @@ services:
       - 3306:3306
     volumes:
       - mydb:/var/lib/mysql
+    networks:
+      - inception_net
+  ###################### Wordpress container #####################
   wordpress:
     container_name: wordpress
     build: ./requirements/wordpress/
@@ -19,6 +23,9 @@ services:
       - 9000:9000
     volumes:
       - Wordpress:/var/www/html
+    networks:
+      - inception_net
+  ###################### Nginx container #####################
   nginx:
     container_name: nginx
     build: ./requirements/nginx/
@@ -29,23 +36,28 @@ services:
       - 443:443
     volumes:
       - Wordpress:/var/www/html
+    networks:
+      - inception_net
+  ##################### Admin container #####################
   adminer:
     build: ./requirements/bonus/adminer/
     depends_on:
       - mariadb
     ports:
       - 8080:8080
+    networks:
+      - inception_net
 volumes:
   mydb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/db
+      device: /Users/ybolles/Desktop/incep/db
       o: bind
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/wordpress
+      device: /Users/ybolles/Desktop/incep/wordpress
       o: bind
-
-# networks:
+networks:
+    inception_net:
