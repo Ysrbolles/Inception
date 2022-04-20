@@ -14,6 +14,7 @@ RUN sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/g' /etc/php/7.3/fpm/pool.d/www.co
 RUN sed -i 's/;clear_env = no/clear_env = no/g' /etc/php/7.3/fpm/pool.d/www.conf
 RUN service php7.3-fpm start
 RUN chown www-data:www-data -R /var/www/html/wordpress/
-# RUN sed/run/php/php7.3-fpm.sock
+
 EXPOSE 9000
+ 
 CMD [ "php-fpm7.3", "--nodaemonize" ]

@@ -9,7 +9,7 @@ services:
     # volumes:
     #   - mydb:/var/lib/mysql
   adminer:
-    image: adminer
+    build: ./requirements/bonus/adminer/
     depends_on:
       - mariadb
     ports:
