@@ -33,7 +33,7 @@ define( 'DB_HOST', getenv('MYSQL_HOST') );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
-
+define('WP_REDIS_HOST', 'redis');
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
