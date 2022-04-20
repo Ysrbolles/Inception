@@ -40,6 +40,7 @@ services:
       - inception_net
   ##################### Admin container #####################
   adminer:
+    container_name: adminer
     build: ./requirements/bonus/adminer/
     depends_on:
       - mariadb
@@ -47,6 +48,14 @@ services:
       - 8080:8080
     networks:
       - inception_net
+  ###################### Redis container #####################
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis/
+    ports:
+      - 6379:6379
+    volumes:
+      - Wordpress:/etc/redis
 volumes:
   mydb:
     driver: local
