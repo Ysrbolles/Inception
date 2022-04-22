@@ -63,24 +63,23 @@ services:
     depends_on:
       - wordpress
     ports:
-      # - 21:21
+      - "21:21"
       - 30000-30009:30000-30009
-      - 21:21
-    # volumes:
-    #   - Wordpress:/var/www/html
-    # networks:
-    #   - inception_net
+    volumes:
+      - Wordpress:/home/ybolles/ftp
+    networks:
+      - inception_net
 volumes:
   mydb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/ybolles/Desktop/incep/db
+      device: /Users/ysrbolles/Desktop/incep/db
       o: bind
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ybolles/Desktop/incep/wordpress
+      device: /Users/ysrbolles/Desktop/incep/wordpress
       o: bind
 networks:
-    inception_net:
+  inception_net:
