@@ -69,6 +69,16 @@ services:
       - Wordpress:/home/ybolles/ftp
     networks:
       - inception_net
+  ###################### My Website container #####################
+  website:
+    container_name: website
+    build: ./requirements/bonus/website
+    ports:
+      - 3000:3000
+    volumes:
+      - Wordpress:/var/www/html
+    networks:
+      - inception_net
 volumes:
   mydb:
     driver: local
