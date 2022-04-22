@@ -56,7 +56,20 @@ services:
       - 6379:6379
     networks:
       - inception_net
-    
+  ###################### FTP Server container #####################
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    depends_on:
+      - wordpress
+    ports:
+      # - 21:21
+      - 30000-30009:30000-30009
+      - 21:21
+    # volumes:
+    #   - Wordpress:/var/www/html
+    # networks:
+    #   - inception_net
 volumes:
   mydb:
     driver: local
