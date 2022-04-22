@@ -60,6 +60,7 @@ services:
   ftp:
     container_name: ftp
     build: ./requirements/bonus/ftp
+    restart: always
     depends_on:
       - wordpress
     ports:
@@ -69,6 +70,7 @@ services:
       - Wordpress:/home/ybolles/ftp
     networks:
       - inception_net
+<<<<<<< HEAD
   ###################### My Website container #####################
   website:
     container_name: website
@@ -77,6 +79,18 @@ services:
       - 3000:3000
     volumes:
       - Wordpress:/var/www/html
+=======
+  ###################### cadvisor && backup Server container #####################
+  backup:
+    container_name: backup
+    build: ./requirements/bonus/backup
+    depends_on:
+      - mariadb
+    ports:
+      - 7000:7000
+    volumes:
+      - mydb:/var/lib/mysql
+>>>>>>> b2b10a7b9c31d2c25d142030687da121f8138284
     networks:
       - inception_net
 volumes:
@@ -84,12 +98,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/db
+      device: /Users/ybolles/Desktop/incep/db
       o: bind
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/wordpress
+      device: /Users/ybolles/Desktop/incep/wordpress
       o: bind
 networks:
   inception_net:
