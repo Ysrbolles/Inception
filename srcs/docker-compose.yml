@@ -5,6 +5,7 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb/
     restart: always
+    env_file: .env
     ports:
       - 3306:3306
     volumes:
@@ -30,6 +31,7 @@ services:
     container_name: nginx
     build: ./requirements/nginx/
     restart: always
+    env_file: .env
     depends_on:
       - wordpress
     ports:
@@ -42,6 +44,8 @@ services:
   adminer:
     container_name: adminer
     build: ./requirements/bonus/adminer/
+    restart: always
+    env_file: .env
     depends_on:
       - mariadb
     ports:
@@ -52,6 +56,8 @@ services:
   redis:
     container_name: redis
     build: ./requirements/bonus/redis/
+    restart: always
+    env_file: .env
     ports:
       - 6379:6379
     networks:
@@ -61,6 +67,7 @@ services:
     container_name: ftp
     build: ./requirements/bonus/ftp
     restart: always
+    env_file: .env
     depends_on:
       - wordpress
     ports:
@@ -75,6 +82,7 @@ services:
     container_name: website
     build: ./requirements/bonus/website
     restart: always
+    env_file: .env
     ports:
       - 3000:3000
     volumes:
@@ -85,6 +93,8 @@ services:
   backup:
     container_name: backup
     build: ./requirements/bonus/backup
+    restart: always
+    env_file: .env
     depends_on:
       - mariadb
     ports:
@@ -103,7 +113,7 @@ volumes:
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ybolles/Desktop/incep/wordpress
+      device: /Users/ybolles/Desktop/incep/wp
       o: bind
 networks:
   inception_net:
