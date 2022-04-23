@@ -103,6 +103,7 @@ services:
       - mydb:/var/lib/mysql
     networks:
       - inception_net
+###################### Volumes Section #####################
 volumes:
   mydb:
     driver: local
@@ -115,5 +116,6 @@ volumes:
       type: none
       device: /Users/ybolles/Desktop/incep/wp
       o: bind
+###################### Networks Section #####################
 networks:
   inception_net:
