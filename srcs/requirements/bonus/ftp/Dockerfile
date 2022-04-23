@@ -8,19 +8,11 @@ RUN apt-get update && \
 
 COPY ./tools/vsftpd.conf vsftpd.conf
 COPY ./tools/start.sh start.sh
-# RUN 
-# RUN service vsftpd start
-# RUN adduser ybolles
-# RUN echo "ybolles:ybolles" | chpasswd
-# RUN mkdir -p /home/ybolles/ftp 
-# RUN chown ybolles:ybolles /home/ybolles/ftp
-# RUN chmod a-w /home/ybolles/ftp
-# RUN mkdir /home/ybolles/ftp/files
-# RUN echo "ybolles" | tee -a /etc/vsftpd.userlist
+
 
 
 
 EXPOSE 21
 EXPOSE 30000-30009
 
-CMD [ "sh", "start.sh"]
+CMD [ "sh", "start.sh", "&&", "service", "vsftpd", "restart"]

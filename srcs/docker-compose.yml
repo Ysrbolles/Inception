@@ -111,12 +111,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/db
+      device: /Users/ybolles/Desktop/incep/db
       o: bind
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ysrbolles/Desktop/incep/wp
+      device: /Users/ybolles/Desktop/incep/wp
       o: bind
 ###################### Networks Section #####################
 networks:
