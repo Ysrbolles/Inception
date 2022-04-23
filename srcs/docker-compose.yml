@@ -78,43 +78,45 @@ services:
     networks:
       - inception_net
   ###################### My Website container #####################
-  website:
-    container_name: website
-    build: ./requirements/bonus/website
-    restart: always
-    env_file: .env
-    ports:
-      - 3000:3000
-    volumes:
-      - Wordpress:/var/www/html
-    networks:
-      - inception_net
+  # website:
+  #   container_name: website
+  #   build: ./requirements/bonus/website
+  #   restart: always
+  #   env_file: .env
+  #   depends_on:
+  #     - wordpress
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - Wordpress:/var/www/html
+  #   networks:
+  #     - inception_net
   ###################### cadvisor && backup Server container #####################
-  backup:
-    container_name: backup
-    build: ./requirements/bonus/backup
-    restart: always
-    env_file: .env
-    depends_on:
-      - mariadb
-    ports:
-      - 7000:7000
-    volumes:
-      - mydb:/var/lib/mysql
-    networks:
-      - inception_net
-###################### Volumes Section #####################
+  # backup:
+  #   container_name: backup
+  #   build: ./requirements/bonus/backup
+  #   restart: always
+  #   env_file: .env
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - 7000:7000
+  #   volumes:
+  #     - mydb:/var/lib/mysql
+  #   networks:
+  #     - inception_net
+  ###################### Volumes Section #####################
 volumes:
   mydb:
     driver: local
     driver_opts:
       type: none
-      device: /Users/ybolles/Desktop/incep/db
+      device: /Users/ysrbolles/Desktop/incep/db
       o: bind
   Wordpress:
     driver_opts:
       type: none
-      device: /Users/ybolles/Desktop/incep/wp
+      device: /Users/ysrbolles/Desktop/incep/wp
       o: bind
 ###################### Networks Section #####################
 networks:
