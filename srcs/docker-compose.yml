@@ -2,6 +2,7 @@ version: '3'
 services:
   #################### Database container #####################
   mariadb:
+    image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb/
     restart: always
@@ -14,6 +15,7 @@ services:
       - inception_net
   #################### Wordpress container #####################
   wordpress:
+    image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress/
     restart: always
@@ -28,6 +30,7 @@ services:
       - inception_net
   #################### Nginx container #####################
   nginx:
+    image: nginx
     container_name: nginx
     build: ./requirements/nginx/
     restart: always
@@ -42,6 +45,7 @@ services:
       - inception_net
   #################### Admin container #####################
   adminer:
+    image: adminer
     container_name: adminer
     build: ./requirements/bonus/adminer/
     restart: always
@@ -54,6 +58,7 @@ services:
       - inception_net
   ##################### Redis container #####################
   redis:
+    image: redis
     container_name: redis
     build: ./requirements/bonus/redis/
     restart: always
@@ -64,6 +69,7 @@ services:
       - inception_net
   ##################### FTP Server container #####################
   ftp:
+    image: ftp
     container_name: ftp
     build: ./requirements/bonus/ftp
     restart: always
@@ -79,6 +85,7 @@ services:
       - inception_net
   #################### My Website container #####################
   website:
+    image: website
     container_name: website
     build: ./requirements/bonus/website
     restart: always
@@ -91,14 +98,13 @@ services:
       - inception_net
   #################### cadvisor && backup Server container #####################
   backup:
+    image: backup
     container_name: backup
     build: ./requirements/bonus/backup
     restart: always
     env_file: .env
     depends_on:
       - mariadb
-    ports:
-      - 7000:7000
     volumes:
       - mydb:/var/lib/mysql
     networks:

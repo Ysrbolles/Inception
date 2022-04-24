@@ -11,5 +11,5 @@ COPY ./tools/start.sh start.sh
 
 EXPOSE 21
 EXPOSE 30000-30009
-# "&&", "service", "vsftpd", "restart"
+
 CMD [ "sh", "start.sh"]

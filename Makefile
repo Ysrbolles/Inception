@@ -9,7 +9,7 @@ YELLOW = \033[1;33m
 BLUE = \033[1;34m
 RESET = \033[0m
 
-all: credit hosts rmv volumes run
+all:  hosts rmv volumes run
 
 hosts:
 	@sudo echo "127.0.0.1       " $(DOMAIN_NAME) >> /etc/hosts
@@ -19,33 +19,21 @@ run:
 	@docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	@echo "$(RED)██████████████████ Removing All Containers ██████████████████$(RESET)"
+	@echo "$(RED)################## Removing All Containers ##################$(RESET)"
 	docker-compose -f ./srcs/docker-compose.yml down
 
-reload: down rmv build up
+reload: down rmv run
 
 rm: rmv down
-	@echo "$(RED)█████████████████████ Remove Everything ██████████████████████$(RESET)"
-	docker system prune -a
+	@echo "$(RED)##################### Remove Everything ######################$(RESET)"
+	docker system prune -fa && docker volume prune -f
 	
 rmv:
-	@echo "$(RED)█████████████████████ Deleting volumes ██████████████████████$(RESET)"
+	@echo "$(RED)##################### Deleting volumes ######################$(RESET)"
 	sudo rm -rf $(HOME)/data
 
 volumes:
-	@echo "$(GREEN)█████████████████████ Creating volumes ██████████████████████$(RESET)"
-	mkdir -p /Users/ysrbolles/Desktop/incep/db
-	mkdir -p /Users/ysrbolles/Desktop/incep/wp
-
-
-# Print Credit
-credit:
-	@echo "██╗███╗   ██╗ ██████╗███████╗██████╗ ████████╗██╗ ██████╗ ███╗   ██╗"
-	@echo "██║████╗  ██║██╔════╝██╔════╝██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║"
-	@echo "██║██╔██╗ ██║██║     █████╗  ██████╔╝   ██║   ██║██║   ██║██╔██╗ ██║"
-	@echo "██║██║╚██╗██║██║     ██╔══╝  ██╔═══╝    ██║   ██║██║   ██║██║╚██╗██║"
-	@echo "██║██║ ╚████║╚██████╗███████╗██║        ██║   ██║╚██████╔╝██║ ╚████║"
-	@echo "╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝╚═╝        ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "━━━━━━━━━━━━━━━━━━━━┃Made with love by : \033[1;91ybolles\033[m┃━━━━━━━━━━━━━━━━━━━━━"
-	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+	@echo "$(GREEN)##################### Creating volumes ######################$(RESET)"
+	mkdir -p $(HOME)/data
+	mkdir -p $(HOME)data/db
+	mkdir -p $(HOME)data/wp
