@@ -26,7 +26,7 @@ reload: down rmv run
 
 rm: rmv down
 	@echo "$(RED)##################### Remove Everything ######################$(RESET)"
-	docker system prune -a && docker volume prune -f
+	docker system prune -f && docker volume prune -f
 	docker rmi -f $(docker images -qa)
 	docker rm -f $(docker ps -qa)
 	
