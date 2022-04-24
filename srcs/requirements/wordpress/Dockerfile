@@ -1,11 +1,13 @@
 FROM debian:buster
 
+# update and install dependencies needed !!
 RUN apt-get update && \
 	apt-get install wget -y && \
 	apt-get install unzip -y && \
 	apt-get install php-fpm php-mysql -y && \
 	apt-get upgrade -y
 
+# copy starter script to install redis cache and run php command in foreground
 COPY ./tools/start.sh .
 # Download the latest WordPress version available at https://wordpress.org/download/ and extract it in a directory on your server:
 RUN cd /tmp && wget https://wordpress.org/latest.zip 
@@ -18,6 +20,7 @@ RUN sed -i 's/;clear_env = no/clear_env = no/g' /etc/php/7.3/fpm/pool.d/www.conf
 RUN wget https://downloads.wordpress.org/plugin/redis-cache.2.0.22.zip
 RUN unzip redis-cache.2.0.22.zip
 RUN rm -rf redis-cache.2.0.22.zip
+# start php-fpm service
 RUN service php7.3-fpm start
 RUN chown www-data:www-data -R /var/www/html/wordpress/
 
