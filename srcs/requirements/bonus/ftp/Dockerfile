@@ -6,7 +6,7 @@ RUN apt-get update && \
 	apt-get install vsftpd -y && \
 	apt-get install openssl -y
 
-COPY ./tools/vsftpd.conf vsftpd.conf
+COPY ./conf/vsftpd.conf vsftpd.conf
 COPY ./tools/start.sh start.sh
 
 EXPOSE 21
