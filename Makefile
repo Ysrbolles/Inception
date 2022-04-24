@@ -15,8 +15,8 @@ hosts:
 	@sudo echo "127.0.0.1       " $(DOMAIN_NAME) >> /etc/hosts
 
 run:
-	@echo "$(GREEN)################### Building && Running Containers ################### $(RESET)"
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	@echo "$(GREEN)################### Running Containers ################### $(RESET)"
+	@docker-compose -f ./srcs/docker-compose.yml up -d 
 
 down:
 	@echo "$(RED)################## Removing All Containers ##################$(RESET)"
@@ -27,10 +27,12 @@ reload: down rmv run
 rm: rmv down
 	@echo "$(RED)##################### Remove Everything ######################$(RESET)"
 	docker system prune -fa && docker volume prune -f
+	docker rmi -f $(docker images -qa)
+	docker rm -f $(docker ps -qa)
 	
 rmv:
 	@echo "$(RED)##################### Deleting volumes ######################$(RESET)"
-	sudo rm -rf $(HOME)/data
+	docker volume prune -fa && docker volume rm $(docker volume ls)
 
 volumes:
 	@echo "$(GREEN)##################### Creating volumes ######################$(RESET)"
