@@ -9,10 +9,7 @@ RUN apt-get update && \
 COPY ./tools/vsftpd.conf vsftpd.conf
 COPY ./tools/start.sh start.sh
 
-
-
-
 EXPOSE 21
 EXPOSE 30000-30009
-
-CMD [ "sh", "start.sh", "&&", "service", "vsftpd", "restart"]
+# "&&", "service", "vsftpd", "restart"
+CMD [ "sh", "start.sh"]

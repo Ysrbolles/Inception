@@ -6,7 +6,7 @@ RUN apt-get update -y && \
 
 RUN sed -i 's/Listen 80/Listen 3000/g' /etc/apache2/ports.conf 
 COPY ./tools/start.sh start.sh
+RUN rm -rf /var/www/html/
 RUN  git clone https://github.com/Ysrbolles/Multiverse.git /var/www/html/
-
 
 CMD [ "sh", "start.sh" ]

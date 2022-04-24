@@ -1,6 +1,7 @@
 CREATE DATABASE ybolles;
 CREATE USER 'ybolles'@'%';
 GRANT ALL PRIVILEGES ON ybolles.* to 'ybolles'@'%' IDENTIFIED BY 'ybolles';
+-- ALTER USER 'root'@'%' IDENTIFIED BY 'ybolles';
 FLUSH PRIVILEGES;
 
 

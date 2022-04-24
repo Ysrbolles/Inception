@@ -5,6 +5,8 @@ RUN apt-get update && \
 	apt-get install unzip -y && \
 	apt-get install php-fpm php-mysql -y && \
 	apt-get upgrade -y
+
+COPY ./tools/start.sh .
 # Download the latest WordPress version available at https://wordpress.org/download/ and extract it in a directory on your server:
 RUN cd /tmp && wget https://wordpress.org/latest.zip 
 RUN mkdir -p /var/www/html && unzip -d /var/www/html/ /tmp/latest.zip 
@@ -21,4 +23,4 @@ RUN chown www-data:www-data -R /var/www/html/wordpress/
 
 EXPOSE 9000
  
-CMD [ "php-fpm7.3", "--nodaemonize" ]
+CMD [ "sh", "start.sh" ]
