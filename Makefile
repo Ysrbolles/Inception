@@ -32,7 +32,7 @@ rm: rmv down
 	
 rmv:
 	@echo "$(RED)##################### Deleting volumes ######################$(RESET)"
-	docker volume prune -a && docker volume rm $(docker volume ls)
+	docker volume prune -f && docker volume rm $(docker volume ls)
 
 volumes:
 	@echo "$(GREEN)##################### Creating volumes ######################$(RESET)"
